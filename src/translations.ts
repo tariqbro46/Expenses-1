@@ -74,6 +74,8 @@ export const translations = {
     note: "Note",
     memo: "Memo",
     confirm_delete: "Are you sure you want to delete this?",
+    all_transactions: "All Transactions",
+    voucher: "Voucher",
   },
   bn: {
     dashboard: "ড্যাশবোর্ড",
@@ -150,6 +152,8 @@ export const translations = {
     note: "নোট",
     memo: "মেমো",
     confirm_delete: "আপনি কি নিশ্চিত যে আপনি এটি মুছতে চান?",
+    all_transactions: "সব লেনদেন",
+    voucher: "ভাউচার",
   },
   hi: {
     dashboard: "डैशबोर्ड",
@@ -226,6 +230,8 @@ export const translations = {
     note: "नोट",
     memo: "मेमो",
     confirm_delete: "क्या आप वाकई इसे हटाना चाहते हैं?",
+    all_transactions: "सभी लेनदेन",
+    voucher: "वाउचर",
   }
 };
 

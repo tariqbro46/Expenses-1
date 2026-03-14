@@ -124,9 +124,9 @@ export default function TransactionForm({ onClose, onSuccess, userId, language }
           <div>
             <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">{t.category}</label>
             <div className="grid grid-cols-4 gap-2 mb-3">
-              {filteredCategories.map((cat) => (
+              {filteredCategories.map((cat, idx) => (
                 <button
-                  key={cat.id}
+                  key={`${cat.id}-${idx}`}
                   type="button"
                   onClick={() => setCategory(cat.id)}
                   className={`flex flex-col items-center p-2 rounded-xl border transition-all ${

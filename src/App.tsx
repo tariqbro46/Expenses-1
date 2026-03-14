@@ -8,6 +8,7 @@ import LedgerEntryForm from './components/LedgerEntryForm';
 import StatementView from './components/StatementView';
 import Profile from './components/Profile';
 import CreatePage from './components/CreatePage';
+import TransactionsPage from './components/TransactionsPage';
 import { Transaction, Ledger, LedgerEntry, CATEGORIES, CustomCategory } from './types';
 import { translations, Language, currencies, CurrencyCode } from './translations';
 import { 
@@ -29,14 +30,15 @@ import {
   Sparkles,
   UserCircle,
   PlusCircle,
-  Edit
+  Edit,
+  FileText
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { format, parseISO } from 'date-fns';
 
 export default function App() {
   const [session, setSession] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'ledger' | 'create' | 'profile'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'ledger' | 'create' | 'profile' | 'transactions'>('dashboard');
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [language, setLanguage] = useState<Language>((localStorage.getItem('language') as Language) || 'en');
   const [currency, setCurrency] = useState<CurrencyCode>((localStorage.getItem('currency') as CurrencyCode) || 'USD');
@@ -182,6 +184,13 @@ export default function App() {
             <span>{t.ledger}</span>
           </button>
           <button 
+            onClick={() => setActiveTab('transactions')}
+            className={`nav-item w-full ${activeTab === 'transactions' ? 'active' : 'inactive'}`}
+          >
+            <FileText size={20} />
+            <span>{t.transaction}</span>
+          </button>
+          <button 
             onClick={() => setActiveTab('create')}
             className={`nav-item w-full ${activeTab === 'create' ? 'active' : 'inactive'}`}
           >
@@ -273,7 +282,12 @@ export default function App() {
                 <div className="space-y-4">
                   <div className="flex justify-between items-center px-2">
                     <h2 className="text-lg font-bold text-[var(--text-main)]">{t.recent_transactions}</h2>
-                    <button className="text-indigo-600 text-sm font-bold">{t.see_all}</button>
+                    <button 
+                      onClick={() => setActiveTab('transactions')}
+                      className="text-indigo-600 text-sm font-bold"
+                    >
+                      {t.see_all}
+                    </button>
                   </div>
 
                   <div className="space-y-3">
@@ -364,6 +378,15 @@ export default function App() {
               onCurrencyChange={(c) => { setCurrency(c); localStorage.setItem('currency', c); }}
             />
           )}
+
+          {activeTab === 'transactions' && (
+            <TransactionsPage 
+              transactions={transactions}
+              onDelete={(id) => setConfirmDelete({ type: 'transaction', id })}
+              language={language}
+              currencySymbol={curr.symbol}
+            />
+          )}
         </main>
 
         {/* FAB (Mobile Only) */}
@@ -391,6 +414,13 @@ export default function App() {
           >
             <BookOpen size={24} />
             <span className="text-[10px] font-bold">{t.ledger}</span>
+          </button>
+          <button 
+            onClick={() => setActiveTab('transactions')}
+            className={`flex flex-col items-center gap-1 ${activeTab === 'transactions' ? 'text-indigo-600' : 'text-[var(--text-muted)]'}`}
+          >
+            <FileText size={24} />
+            <span className="text-[10px] font-bold">{t.transaction}</span>
           </button>
           <button 
             onClick={() => setActiveTab('create')}
