@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #f1f5f9;
+  --accent-color: #4f46e5;
+  --accent-soft: #eef2ff;
+}
+
+[data-theme='dark'] {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --accent-color: #6366f1;
+  --accent-soft: #312e81;
+}
+
+[data-theme='grey'] {
+  --bg-main: #f1f5f9;
+  --bg-card: #e2e8f0;
+  --text-main: #1e293b;
+  --text-muted: #475569;
+  --border-color: #cbd5e1;
+  --accent-color: #334155;
+  --accent-soft: #94a3b8;
+}
+
+[data-theme='black'] {
+  --bg-main: #000000;
+  --bg-card: #111111;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --border-color: #222222;
+  --accent-color: #ffffff;
+  --accent-soft: #333333;
+}
+
+[data-theme='focus'] {
+  --bg-main: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #000000;
+  --text-muted: #777777;
+  --border-color: #eeeeee;
+  --accent-color: #000000;
+  --accent-soft: #f5f5f5;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  @apply antialiased select-none transition-colors duration-300;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.glass-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  @apply shadow-sm;
+}
+
+.mobile-bottom-nav {
+  background-color: color-mix(in srgb, var(--bg-card), transparent 20%);
+  border-top: 1px solid var(--border-color);
+  @apply fixed bottom-0 left-0 right-0 backdrop-blur-lg px-6 py-3 flex justify-around items-center z-50 md:hidden;
+}
+
+.fab {
+  @apply fixed bottom-24 right-6 w-14 h-14 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-xl shadow-indigo-200 active:scale-95 transition-transform z-40 md:hidden;
+}
+
+.desktop-sidebar {
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  @apply hidden md:flex flex-col w-64 h-screen sticky top-0 p-6;
+}
+
+.nav-item {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl font-bold transition-all cursor-pointer mb-2;
+}
+
+.nav-item.active {
+  background-color: var(--accent-soft);
+  color: var(--accent-color);
+}
+
+.nav-item.inactive {
+  color: var(--text-muted);
+  @apply hover:bg-[var(--accent-soft)] hover:text-[var(--accent-color)];
+}
+
+input, select, textarea {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  @apply w-full px-4 py-3 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all;
+}
+
+/* iOS-like Modal Styles */
+.ios-modal-overlay {
+  @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center;
+}
+
+.ios-modal-content {
+  background-color: var(--bg-card);
+  @apply w-full max-h-[92vh] rounded-t-[32px] sm:rounded-[32px] sm:max-w-md overflow-hidden flex flex-col shadow-2xl;
+}
+
+.ios-modal-handle {
+  @apply w-12 h-1.5 bg-slate-200 rounded-full mx-auto my-3 sm:hidden;
+}
+
+button {
+  @apply cursor-pointer;
+}
